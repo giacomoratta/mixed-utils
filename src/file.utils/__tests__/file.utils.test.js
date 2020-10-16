@@ -1,5 +1,5 @@
 const path = require('path')
-const { fileUtils } = require('../index')
+const fileUtils = require('../index')
 
 describe('file.utils', function () {
   it('should create standard cross-os absolute paths', function () {

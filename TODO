@@ -1,1 +1,5 @@
 - check file.utils sync/async
+
+- (bundle with webpack) https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
+
+- https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html

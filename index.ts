@@ -1,5 +1,4 @@
 module.exports = {
-  array: require('./src/array.utils'),
   code: require('./src/code.utils'),
   date: require('./src/date.utils'),
   file: require('./src/file.utils'),
