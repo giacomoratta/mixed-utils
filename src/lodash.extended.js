@@ -1,5 +1,6 @@
 // Basic Lodash functions
 const _ = {
+  cloneDeep: require('lodash.clonedeep'),
   deburr: require('lodash.deburr'),
   isFunction: require('lodash.isfunction'),
   isNaN: require('lodash.isnan'),
