@@ -8,8 +8,8 @@ module.exports = {
     '<rootDir>/src'
   ],
   testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|js)',
-    '**/?(*.)+(spec|test).+(ts|tsx|js)'
+    // '**/__tests__/**/*.+(ts|tsx|js)',
+    '**/?(*.)+(spec|test).+(ts|tsx)'
   ],
   transform: {
     '^.+\\.jsx?$': 'babel-jest',

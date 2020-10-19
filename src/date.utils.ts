@@ -38,53 +38,46 @@ interface DateTimeChunks {
  * @param date string|number|Date
  * @return DateTimeChunks
  */
-module.exports.extractDateTimeChunks = (date: string|number|Date) => {
+export const extractDateTimeChunks = (date: string|number|Date): DateTimeChunks => {
   const d = date instanceof Date ? date : new Date(date)
-  const chunks = { } as DateTimeChunks
-
-  chunks.timestampMs = d.getTime()
-
-  chunks.day = {
-    d: d.getDate(),
-    dd: d.getDate().toString().padStart(2, '0'),
-    th: ((day: number = d.getDate()): string => {
-      if (day === 1) return '1st'
-      if (day === 2) return '2nd'
-      if (day === 3) return '3rd'
-      return day.toString() + 'th'
-    })(),
-    weekPos: d.getDay(),
-    abbr: DAYS_LIST[d.getDay()].abbreviation,
-    name: DAYS_LIST[d.getDay()].name
+  const chunks: DateTimeChunks = {
+    timestampMs: d.getTime(),
+    day: {
+      d: d.getDate(),
+      dd: d.getDate().toString().padStart(2, '0'),
+      th: ((day: number = d.getDate()): string => {
+        if (day === 1) return '1st'
+        if (day === 2) return '2nd'
+        if (day === 3) return '3rd'
+        return day.toString() + 'th'
+      })(),
+      weekPos: d.getDay(),
+      abbr: DAYS_LIST[d.getDay()].abbreviation,
+      name: DAYS_LIST[d.getDay()].name
+    },
+    month: {
+      m: (d.getMonth() + 1),
+      mm: (d.getMonth() + 1).toString().padStart(2, '0'),
+      abbr: MONTHS_LIST[d.getMonth()].abbreviation,
+      name: MONTHS_LIST[d.getMonth()].name
+    },
+    year: {
+      y: d.getFullYear(),
+      yyyy: d.getFullYear().toString()
+    },
+    hours: {
+      h: d.getHours(),
+      hh: d.getHours().toString().padStart(2, '0')
+    },
+    minutes: {
+      i: d.getMinutes(),
+      ii: d.getMinutes().toString().padStart(2, '0')
+    },
+    seconds: {
+      s: d.getSeconds(),
+      ss: d.getSeconds().toString().padStart(2, '0')
+    }
   }
-
-  chunks.month = {
-    m: (d.getMonth() + 1),
-    mm: (d.getMonth() + 1).toString().padStart(2, '0'),
-    abbr: MONTHS_LIST[d.getMonth()].abbreviation,
-    name: MONTHS_LIST[d.getMonth()].name
-  }
-
-  chunks.year = {
-    y: d.getFullYear(),
-    yyyy: d.getFullYear().toString()
-  }
-
-  chunks.hours = {
-    h: d.getHours(),
-    hh: d.getHours().toString().padStart(2, '0')
-  }
-
-  chunks.minutes = {
-    i: d.getMinutes(),
-    ii: d.getMinutes().toString().padStart(2, '0')
-  }
-
-  chunks.seconds = {
-    s: d.getSeconds(),
-    ss: d.getSeconds().toString().padStart(2, '0')
-  }
-
   return chunks
 }
 
@@ -94,10 +87,10 @@ module.exports.extractDateTimeChunks = (date: string|number|Date) => {
  * @param endDate? string|number|Date
  * @return { start: Date, end: Date }
  */
-module.exports.getWeekInterval = (
+export const getWeekInterval = (
   startDate: string|number|Date,
   endDate?: string|number|Date
-) => {
+): { start: Date, end: Date } => {
   const tempDate1 = startDate instanceof Date ? startDate : new Date(startDate)
   const tempDate2 = (endDate === undefined ? null : endDate instanceof Date ? endDate : new Date(endDate))
 

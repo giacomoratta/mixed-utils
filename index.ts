@@ -1,10 +1,8 @@
 module.exports = {
   code: require('./src/code.utils'),
-  date: {
-    DateTimeChunks: require('./src/DateTimeChunks.class')
-  },
+  date: require('./src/date.utils'),
   file: require('./src/file.utils'),
-  lodash: require('./src/lodash.extended'),
+  lodash: require('./src/lodash.local'),
   object: require('./src/object.utils'),
   process: require('./src/process.utils'),
   string: require('./src/string.utils'),

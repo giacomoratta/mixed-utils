@@ -12,7 +12,7 @@ const F = function (args: any): any {
  * @param params Array<String>: array with parameters names
  * @param body String: function body, without main brackets
  */
-module.exports.createFunction = function (params: string[], body: string) {
+export const createFunction = function (params: string[], body: string): object {
   try {
     F.prototype = Function.prototype
     return new (F as any)([...params, body])

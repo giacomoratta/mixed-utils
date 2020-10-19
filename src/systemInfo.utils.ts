@@ -1,4 +1,4 @@
-import { platform, EOL } from 'os'
+import { platform } from 'os'
 
 // https://nodejs.org/dist/latest-v8.x/docs/api/os.html#os_os_platform
 /*
@@ -19,16 +19,14 @@ os.type()
 os.uptime()
 */
 
-module.exports.EOL = EOL
-
-module.exports.isWindows = () => {
+export const isWindows = (): boolean => {
   return platform() === 'win32'
 }
 
-module.exports.isMacOS = () => {
+export const isMacOS = (): boolean => {
   return platform() === 'darwin'
 }
 
-module.exports.isLinux = () => {
+export const isLinux = (): boolean => {
   return platform() === 'linux'
 }
