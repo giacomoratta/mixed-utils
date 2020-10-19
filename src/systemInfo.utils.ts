@@ -1,6 +1,4 @@
-const os = require('os')
-
-const libUtils = {}
+import { platform, EOL } from 'os'
 
 // https://nodejs.org/dist/latest-v8.x/docs/api/os.html#os_os_platform
 /*
@@ -21,14 +19,16 @@ os.type()
 os.uptime()
 */
 
-libUtils.EOL = os.EOL
+module.exports.EOL = EOL
 
-libUtils.isWindows = () => {
-  return os.platform() === 'win32'
+module.exports.isWindows = () => {
+  return platform() === 'win32'
 }
 
-libUtils.isMacOS = () => {
-  return os.platform() === 'darwin'
+module.exports.isMacOS = () => {
+  return platform() === 'darwin'
 }
 
-module.exports = libUtils
+module.exports.isLinux = () => {
+  return platform() === 'linux'
+}
