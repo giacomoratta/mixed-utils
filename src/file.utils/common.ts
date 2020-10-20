@@ -10,7 +10,7 @@ export const isRelativePath = (relPath: string): boolean => {
   return !isAbsolutePath(relPath)
 }
 
-export const setAsAbsPath = (relPath: string, isFile: boolean, rootPath: string): string => {
+export const setAsAbsPath = (relPath: string, isFile?: boolean, rootPath?: string): string => {
   relPath = relPath.trim()
   if (typeof rootPath !== 'string') return path.resolve(relPath) + (!isFile ? path.sep : '')
   return path.join(rootPath, relPath, (!isFile ? path.sep : ''))
