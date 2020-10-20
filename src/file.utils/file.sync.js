@@ -8,22 +8,6 @@ const stringToBuffer = (string) => { return Buffer.from('' + (string || ''), 'bi
 
 const libUtils = {}
 
-libUtils.checkAndSetDuplicatedFileNameSync = (pathString, renameFn) => {
-  if (!_.isFunction(renameFn)) {
-    renameFn = function (pStr, index) {
-      return libUtils.pathChangeFilename(pStr, function (oldName) {
-        return oldName + '_' + index
-      })
-    }
-  }
-  return _.noDuplicatedValues(null, pathString, (v, cv, i /*, a */) => {
-    if (!fs.existsSync(cv)) return true // found a free value
-    cv = renameFn(v, i)
-    // console.log('checkAndSetDuplicatedFileNameSync ... changing '+v+' to '+cv)
-    return cv
-  })
-}
-
 libUtils.fileExistsSync = (pathString) => {
   if (!_.isString(pathString)) return false
   return fs.existsSync(pathString)

@@ -1,4 +1,4 @@
-const libUtils = require('../object.utils')
+import * as libUtils from '../object.utils'
 
 describe('object.utils', function () {
   describe('sortObjectByValue', function () {

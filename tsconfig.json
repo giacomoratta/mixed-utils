@@ -10,5 +10,7 @@
     "target": "ES2015"
   },
   "include": ["src/**/*", "index.ts"],
-  "exclude": ["node_modules","src/**/__tests__"]
+  "exclude": ["node_modules"] //, "src/**/__tests__"]
 }
+
+// https://stackoverflow.com/questions/61956555/why-is-typescript-eslint-parser-including-files-outside-of-those-configured-in

@@ -1,28 +1,24 @@
 import { platform } from 'os'
-const libUtils = require('../systemInfo.utils')
+import * as libUtils from '../systemInfo.utils'
 
 describe('systemInfo.utils', function () {
   describe('platform information', function () {
     it('should detect current platform', function () {
-
       const currentPlatform = platform()
 
-      if(currentPlatform === 'linux') {
+      if (currentPlatform === 'linux') {
         expect(libUtils.isLinux()).toBeTruthy()
         expect(libUtils.isMacOS()).toBeFalsy()
         expect(libUtils.isWindows()).toBeFalsy()
-      }
-      else if(currentPlatform === 'darwin') {
+      } else if (currentPlatform === 'darwin') {
         expect(libUtils.isLinux()).toBeFalsy()
         expect(libUtils.isMacOS()).toBeFalsy()
         expect(libUtils.isWindows()).toBeFalsy()
-      }
-      else if(currentPlatform === 'win32') {
+      } else if (currentPlatform === 'win32') {
         expect(libUtils.isLinux()).toBeFalsy()
         expect(libUtils.isMacOS()).toBeFalsy()
         expect(libUtils.isWindows()).toBeTruthy()
       }
-
     })
   })
 })

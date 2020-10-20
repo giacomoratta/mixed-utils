@@ -5,7 +5,7 @@ const _ = {
   fromPairs: require('lodash.frompairs'),
   isFunction: require('lodash.isfunction'),
   isNaN: require('lodash.isnan'),
-  isNil: require('lodash.isnil'),
+  isNil: function (value: any): boolean { return value === undefined || value === null },
   isObject: require('lodash.isobject'),
   isString: require('lodash.isstring'),
   mixin: require('lodash.mixin'),

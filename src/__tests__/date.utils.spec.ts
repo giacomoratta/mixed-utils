@@ -1,4 +1,4 @@
-const libUtils = require('../date.utils')
+import * as libUtils from '../date.utils'
 
 describe('date.utils', function () {
   describe('extractDateTimeChunks', function () {

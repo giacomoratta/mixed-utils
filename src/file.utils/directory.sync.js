@@ -1,36 +1,10 @@
-const _ = require('../lodash.local')
-const path = require('path')
-const fs = require('fs')
+import * as path from 'path'
+import _ from '../lodash.local'
+import * as fs from 'fs'
 const fsExtra = require('fs-extra')
 const rimraf = require('rimraf') /* A "rm -rf" util for nodejs */
 
-const libUtils = {}
-
-libUtils.isAbsoluteParentDirSync = (pathString, checkExists) => {
-  if (!_.isString(pathString)) return false
-  if (!path.isAbsolute(pathString)) return false
-  if (checkExists !== true) return true
-  const psDirname = path.dirname(pathString)
-  return libUtils.directoryExistsSync(psDirname)
-}
-
-libUtils.checkAndSetDuplicatedDirectoryNameSync = (pathString, renameFn) => {
-  if (!_.isFunction(renameFn)) {
-    renameFn = function (pStr, index) {
-      return libUtils.pathChangeDirname(pStr, function (oldName) {
-        return oldName + '_' + index
-      })
-    }
-  }
-  return _.noDuplicatedValues(null, pathString, (v, cv, i /*, a */) => {
-    if (!fs.existsSync(cv)) return true // found a free value
-    cv = renameFn(v, i)
-    // console.log('checkAndSetDuplicatedDirectoryNameSync ... changing '+v+' to '+cv)
-    return cv
-  })
-}
-
-libUtils.checkAndSetPathSync = (pathString, callback) => {
+export const checkAndSetPathSync = (pathString, callback) => {
   if (!_.isString(pathString)) return null
   if (!fs.existsSync(pathString)) return null
   pathString = path.resolve(pathString) + path.sep
@@ -38,12 +12,12 @@ libUtils.checkAndSetPathSync = (pathString, callback) => {
   return pathString
 }
 
-libUtils.directoryExistsSync = (pathString) => {
+export const directoryExistsSync = (pathString) => {
   if (!_.isString(pathString)) return false
   return fs.existsSync(pathString)
 }
 
-libUtils.ensureDirSync = (pathString) => {
+export const ensureDirSync = (pathString) => {
   try {
     fsExtra.ensureDirSync(pathString)
   } catch (e) {
@@ -52,7 +26,7 @@ libUtils.ensureDirSync = (pathString) => {
   return true
 }
 
-libUtils.ensureParentDirSync = (pathString) => {
+export const ensureParentDirSync = (pathString) => {
   try {
     fsExtra.ensureDirSync(path.parse(pathString).dir)
   } catch (e) {
@@ -61,7 +35,7 @@ libUtils.ensureParentDirSync = (pathString) => {
   return true
 }
 
-libUtils.copyDirectorySync = (pathFrom, pathTo, options) => {
+export const copyDirectorySync = (pathFrom, pathTo, options) => {
   options = {
     overwrite: false,
     errorOnExist: false,
@@ -81,7 +55,7 @@ libUtils.copyDirectorySync = (pathFrom, pathTo, options) => {
   return result
 }
 
-libUtils.moveDirectorySync = (pathFrom, pathTo, options) => {
+export const moveDirectorySync = (pathFrom, pathTo, options) => {
   options = {
     overwrite: false,
     errorOnExist: false,
@@ -106,7 +80,7 @@ libUtils.moveDirectorySync = (pathFrom, pathTo, options) => {
   return result
 }
 
-libUtils.readDirectorySync = (pathString, preProcessItemsFn, itemFn) => {
+export const readDirectorySync = (pathString, preProcessItemsFn, itemFn) => {
   if (!itemFn) itemFn = function () {}
   if (!preProcessItemsFn) preProcessItemsFn = function () {}
   let items = null
@@ -124,11 +98,11 @@ libUtils.readDirectorySync = (pathString, preProcessItemsFn, itemFn) => {
   return items
 }
 
-libUtils.uniqueDirectoryNameSync = ({ parentPath, directoryName }) => {
+export const uniqueDirectoryNameSync = ({ parentPath, directoryName }) => {
   let newDestinationPath = path.join(parentPath, directoryName)
   const parsedDir = path.parse(newDestinationPath)
   let i = 1
-  while (libUtils.directoryExistsSync(newDestinationPath) === true && i < 1000) {
+  while (directoryExistsSync(newDestinationPath) === true && i < 1000) {
     newDestinationPath = path.join(parsedDir.dir, `${parsedDir.base}_${i}`)
     i++
   }
@@ -136,7 +110,7 @@ libUtils.uniqueDirectoryNameSync = ({ parentPath, directoryName }) => {
   return newDestinationPath
 }
 
-libUtils.removeDirSync = (pathString) => {
+export const removeDirSync = (pathString) => {
   try {
     rimraf.sync(pathString)
     return true
@@ -146,7 +120,7 @@ libUtils.removeDirSync = (pathString) => {
   }
 }
 
-libUtils.getPathStatsSync = (pathString, errorFn) => {
+export const getPathStatsSync = (pathString, errorFn) => {
   // usage: isDirectory, isFile
   try {
     return fs.lstatSync(pathString)
@@ -154,5 +128,3 @@ libUtils.getPathStatsSync = (pathString, errorFn) => {
     errorFn && errorFn(e)
   }
 }
-
-module.exports = libUtils

@@ -1,4 +1,4 @@
-const libUtils = require('../code.utils')
+import * as libUtils from '../code.utils'
 
 describe('code.utils', function () {
   describe('createFunction', function () {
